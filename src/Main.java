@@ -34,7 +34,7 @@ public class Main {
 
         double epsilon = Double.parseDouble(commandLine.getOptionValue("eps", "0.05"));
         String variant = commandLine.getOptionValue("var", "zero");
-        int variantLanguage = Integer.parseInt(commandLine.getOptionValue("iv", "0"));
+        int variantLanguage = Integer.parseInt(commandLine.getOptionValue("iv", "0"))-1;
         int variantInfluence = Integer.parseInt(commandLine.getOptionValue("v", "0"));
 
         Simulation pattern = ECLPaperSimulationCreator.builder()
