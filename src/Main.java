@@ -48,7 +48,7 @@ public class Main {
         int simulations = Integer.parseInt(commandLine.getOptionValue("s", "1000"));
         int stopIteration = Integer.parseInt(commandLine.getOptionValue("stop", "100000"));
 
-        conductor.conduct(simulations, 100000);
+        conductor.conduct(simulations, stopIteration);
 
         try {
             SimulationConductorSerializer.writeToJSON(conductor, commandLine.getOptionValue("p", "results.json"));
