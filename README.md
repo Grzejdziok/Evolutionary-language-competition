@@ -16,6 +16,7 @@ git clone https://github.com/Grzejdziok/Evolutionary-language-competition
 ```
 Source code is provided in "src" directory and an executable file in the "jar" directory.
 
+### Building the project
 If you want to build the program by your own, there are configuration files provided for build with [Maven](https://maven.apache.org/)(pom.xml) and [Gradle](https://gradle.org/) (build.gradle, settings.gradle). Build process is configured so that it creates a jar executable file in the "jar" directory with all dependencies included.
 #### Building the project with Maven
 In the project directory, run the following command to compile the project into an executable jar file with dependencies included:
