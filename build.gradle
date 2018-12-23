@@ -1,0 +1,52 @@
+plugins {
+	id 'java'
+	id 'maven'
+	id 'application'
+	id 'base'
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url = 'http://repo.maven.apache.org/maven2'
+    }
+}
+
+dependencies {
+    compile 'org.projectlombok:lombok:1.18.4'
+    annotationProcessor "org.projectlombok:lombok:1.18.4"
+    compile 'commons-cli:commons-cli:1.4'
+    compile 'com.fasterxml.jackson.core:jackson-core:2.9.7'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.9.7'
+    compile 'uk.com.robust-it:cloning:1.9.10'
+}
+
+group = 'elcpaper'
+version = '1.0'
+sourceCompatibility = '1.8'
+
+sourceSets.main.java.srcDir 'src'
+sourceSets.main.resources.srcDir 'src'
+
+mainClassName = 'Main'
+
+libsDirName = '../jar'
+
+jar {
+
+    archiveName 'ELCPaperApp.jar'
+
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+
+    from {
+	configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+build.finalizedBy(clean)
