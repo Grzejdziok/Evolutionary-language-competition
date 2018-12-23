@@ -30,8 +30,8 @@ In the project directory, run the following command to compile the project into 
 gradle build
 ```
 The "jar" directory will contain a new version of the jar executable file of the program. There will be also a directory named ".gradle" which serves for build purposes of Gradle.
-#### Dependencies
-The project makes use of several external libraries. All of them are provided below:
+### Dependencies
+The project makes use of several external libraries. All of them are listed below:
 - [Lombok, version 1.18.4](https://projectlombok.org/)
 - [Apache Commons CLI, version 1.4.0](https://commons.apache.org/proper/commons-cli)
 - [jackson-core, version 2.9.7](https://github.com/FasterXML/jackson-core)
