@@ -14,7 +14,6 @@ To get the program, clone the repository with the following command:
 ```
 git clone https://github.com/Grzejdziok/Evolutionary-language-competition
 ```
-
 Source code is provided in "src" directory and an executable file in the "jar" directory.
 
 If you want to build the program by your own, there are configuration files provided for build with [Maven](https://maven.apache.org/)(pom.xml) and [Gradle](https://gradle.org/) (build.gradle, settings.gradle). Build process is configured so that it creates a jar executable file in the "jar" directory with all dependencies included.
@@ -24,29 +23,19 @@ In the project directory, run the following command to compile the project into 
 mvn install
 ```
 The "jar" directory will contain a new version of the jar executable file of the program.
-
-You can delete the "settings.gradle" and "build.gradle" for this process of building.
 #### Building the project with Gradle
 In the project directory, run the following command to compile the project into an executable jar file with dependencies included:
 ```
 gradle build
 ```
 The "jar" directory will contain a new version of the jar executable file of the program. There will be also a directory named ".gradle" which serves for build purposes of Gradle.
-
-You can delete the "pom.xml" file for this process of building.
 #### Dependencies
-
-First, clone the repository with the following command:
-```
-git clone https://github.com/Grzejdziok/Evolutionary-language-competition
-```
 The project makes use of several external libraries. All of them are provided below:
 - [Lombok, version 1.18.4](https://projectlombok.org/)
 - [Apache Commons CLI, version 1.4.0](https://commons.apache.org/proper/commons-cli)
 - [jackson-core, version 2.9.7](https://github.com/FasterXML/jackson-core)
 - [jackson-databind, version 2.9.7](https://github.com/FasterXML/jackson-databind)
 - [Java Cloning Library, version 1.9.10](https://github.com/kostaskougios/cloning)
-
 ## Running the program
 The program can be run from the command line with the arguments denoted as in the paper. Go to the "jar" directory and run the following command:
 ```
