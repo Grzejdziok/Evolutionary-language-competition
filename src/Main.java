@@ -1,9 +1,9 @@
-import cli.ECLPaperOptionsCreator;
 import org.apache.commons.cli.*;
+import cli.ELCPaperOptionsCreator;
 import simulation.simulation.Simulation;
 import simulation.simulation.SimulationConductor;
 import simulation.simulation.SimulationConductorSerializer;
-import simulation.simulation.creator.ECLPaperSimulationCreator;
+import simulation.simulation.creator.ELCPaperSimulationCreator;
 
 import java.io.IOException;
 
@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String args[]){
 
-        Options options = new ECLPaperOptionsCreator().create();
+        Options options = new ELCPaperOptionsCreator().create();
 
         CommandLineParser parser = new DefaultParser();
         CommandLine commandLine;
@@ -37,7 +37,7 @@ public class Main {
         int variantLanguage = Integer.parseInt(commandLine.getOptionValue("iv", "0"))-1;
         int variantInfluence = Integer.parseInt(commandLine.getOptionValue("v", "0"));
 
-        Simulation pattern = ECLPaperSimulationCreator.builder()
+        Simulation pattern = ELCPaperSimulationCreator.builder()
                 .numOfAgents(agents).numsOfUsers(new int[]{agents1, agents2}).side(side)
                 .numOfThings(things).devdegrees(new int[]{devdegree1, devdegree2})
                 .epsilon(epsilon).variant(variant).variantInfluence(variantInfluence)
