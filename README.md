@@ -7,6 +7,7 @@ The model implemented here is agent-based and each agent has its own language. T
 The project is an implementation of the computer model described in the "Evolutionary language competition - an agent-based model" paper which is currently under review in *[International Journal of Applied Mathematics and Computer Science](https://www.amcs.uz.zgora.pl/)*. Detailed information of the model's rules can be found in a pdf file attached to this repository.
 
 ## Installation and build process
+### Installation
 The project is implemented in Java, and therefore to compile it you will need JDK 8.0 or later. You can get it [here](https://www.oracle.com/technetwork/java/javase/downloads/index.html). 
 
 To get the program, clone the repository with the following command:
