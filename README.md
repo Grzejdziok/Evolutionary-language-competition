@@ -1,6 +1,6 @@
 # Evolutionary language competition - an agent-based model
 ## Description
-The project is concerned with simulating the process of how the world's languages are going extinct as a result of *language competition*. It is estimated that about 43% of the world's languages of extinction within next 100 years [[1]](http://www.unesco.org/languages-atlas/index.php?hl=en&page=atlasmap). 
+The project is concerned with simulating the process of how the world's languages are going extinct as a result of *language competition*. The problem is serious, as it is estimated that about 43% of the world's languages are endangered of extinction within next 100 years [[1]](http://www.unesco.org/languages-atlas/index.php?hl=en&page=atlasmap). 
 
 The model implemented here is agent-based and each agent has its own language. The agents are initially divided into two groups speaking two different languages. Through pair-wise interactions agents modify their languages (their languages evolve). At last, in most cases, agents use one common language. Depending on initial conditions, the final language can be identical to one of the initial languages or can be a mixture of both of languages.
 
