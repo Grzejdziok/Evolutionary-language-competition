@@ -40,7 +40,7 @@ The project makes use of several external libraries. All of them are listed belo
 ## Running the program
 The program can be run from the command line with the arguments denoted as in the paper. Go to the "jar" directory and run the following command:
 ```
-java -jar ECLPaperApp.jar <arguments>
+java -jar ELCPaperApp.jar <arguments>
 ```
 Program creates a Simulation object in accordance with provided arguments, conducts the specified number of independent simulations (by default one thousand) and outputs the averaged results to a JSON file (by default named "results.json").
 
