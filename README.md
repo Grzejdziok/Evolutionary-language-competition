@@ -109,7 +109,7 @@ You can run the simulations for this section with the following commands:
 ## Extensions
 I tried to implement the model so that it can be easily extended. The implementation is flexible and one can create new classes to define new behaviours of agents (by implementing the Agent interface), new rules for interactions (by implementing the InteractionRunner interface), new rules for lexicons (by implementing the Lexicon interface), or new structures of population (by implementing the Population interface). This allows to conduct simulations for similar models of language competition within the project's framework.
 ## API Docs
-More detailed documentation will be provided soon in the form of Javadoc.
+More detailed documentation is available [here](https://grzejdziok.github.io/Evolutionary-language-competition/)
 ## Contact
 Please do not hesitate to contact me if you have any questions.
 ## References
