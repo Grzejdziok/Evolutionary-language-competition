@@ -1,7 +1,6 @@
 package simulation.environment;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 
 import java.util.Collection;
@@ -14,7 +13,7 @@ import java.util.Random;
  * @see EnvironmentCreator
  * @see simulation.simulation.creator.ELCPaperSimulationCreator
  */
-@Getter @EqualsAndHashCode @ToString
+@EqualsAndHashCode @ToString
 public class Environment {
 
     private Collection<Thing> things;
@@ -38,4 +37,7 @@ public class Environment {
         throw new AssertionError();
     }
 
+    public Collection<Thing> getThings() {
+        return this.things;
+    }
 }

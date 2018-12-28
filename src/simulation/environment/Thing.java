@@ -1,14 +1,13 @@
 package simulation.environment;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 
 /**
  * A class representing things in environments in which agents are situated in computer models of language evolution.
  * In this implementation, things are identified and distinguished only with integer IDs.
  */
-@Getter @EqualsAndHashCode @ToString
+@EqualsAndHashCode @ToString
 public class Thing implements Comparable<Thing>{
     private final int id;
 
@@ -31,4 +30,7 @@ public class Thing implements Comparable<Thing>{
         return Integer.compare(this.id, o.getId());
     }
 
+    public int getId() {
+        return this.id;
+    }
 }
