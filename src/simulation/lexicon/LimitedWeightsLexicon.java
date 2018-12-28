@@ -5,18 +5,32 @@ import lombok.Getter;
 import lombok.ToString;
 import simulation.language.Language;
 import simulation.environment.Thing;
-import simulation.environment.Word;
+import simulation.language.Word;
 import util.WeightPriorityQueue;
 
 import java.util.*;
 
+/**
+ * A class of weighted lexicons in which association between things and words are weighted with values belonging to
+ * a closed and bounded interval of real numbers.
+ * @see simulation.agent.SuccessCountingAgent
+ * @see simulation.lexicon.creator.LimitedWeightsLexiconCreator
+ * @see WeightedLexicon
+ * @see simulation.simulation.creator.ELCPaperSimulationCreator
+ */
 @Getter @EqualsAndHashCode @ToString
 public class LimitedWeightsLexicon implements WeightedLexicon{
 
     private Map<Thing, WeightPriorityQueue<Word>> thingWordQueueMap;
-    private double minWeight = 0.0;
-    private double maxWeight = 3.0;
+    private double minWeight;
+    private double maxWeight;
 
+    /**
+     * Initializes this lexicon with the given bounds of weights of associations.
+     * All assocations in this lexicon are weighted with the values belonging to the interval {@code [minWeight, maxWeight]}.
+     * @param minWeight the lower bound of weights in this lexicon
+     * @param maxWeight the upper bound of weights in this lexicon
+     */
     public LimitedWeightsLexicon(double minWeight, double maxWeight){
         this.minWeight = minWeight;
         this.maxWeight = maxWeight;
@@ -27,11 +41,23 @@ public class LimitedWeightsLexicon implements WeightedLexicon{
         return Math.min(weight, maxWeight);
     }
 
+    /**
+     * Adds the association between the given thing and the given word weighted with {@code maxWeight}.
+     * @param thing a thing to be added in association with the given word to this lexicon
+     * @param word a word to be added in association with the given thing to this lexicon
+     */
     @Override
     public void add(Thing thing, Word word){
         add(thing, word, limitWeight(maxWeight));
     }
 
+    /**
+     * Adds the association between the given thing and the given word with the given weight.
+     * If the given weight does not belong to {@code [minWeight, maxWeight]}, the closest value to this weight from this interval is used.
+     * @param thing a thing to be added in association with the given word to this lexicon
+     * @param word a word to be added in association with the given thing to this lexicon
+     * @param weight a weight of the added association
+     */
     @Override
     public void add(Thing thing, Word word, double weight) {
         if (weight > minWeight) {
@@ -45,11 +71,25 @@ public class LimitedWeightsLexicon implements WeightedLexicon{
         }
     }
 
+    /**
+     * Increases the weight of the association between the given thing and the given word by the value of {@code by}, but no more than {@code maxWeight}.
+     * @param thing a thing from the association of which the weight should be increased
+     * @param word a word from the association of which the weight should be increased
+     * @param by value to increase the weight of the association between the given thing and the given word
+     */
     @Override
     public void increaseWeight(Thing thing, Word word, double by) {
         thingWordQueueMap.get(thing).changeWeight(word, limitWeight(weight(thing, word) + by));
     }
 
+    /**
+     * Decreases the weight of all associations of the given thing except for the association with the given word by the value of {@code by}.
+     * If the weight of any association reduces to {@code minWeight}, then this association is removed from this lexicon,
+     * unless it was the last association of the given thing. If so, it is left with the weight of {@code minWeight + 0.1}.
+     * @param thing a thing of which associations should be included by this method
+     * @param word a word from the association of which the weight should not be decreased
+     * @param by value to decrease the weights of all associations of the given thing except for the association with the given word
+     */
     @Override
     public void decreaseOtherWeights(Thing thing, Word word, double by) {
         WeightPriorityQueue<Word> queue = thingWordQueueMap.get(thing);
@@ -58,6 +98,14 @@ public class LimitedWeightsLexicon implements WeightedLexicon{
                 decreaseWeight(thing, w, by);
     }
 
+    /**
+     * Decreases the weight of the association between the given thing and the given word by the value of {@code by}.
+     * If the weight of this association reduces to {@code minWeight}, then this association is removed from this lexicon,
+     * unless it was the last association of the given thing. If so, it is left with the weight of {@code minWeight + 0.1}.
+     * @param thing a thing from the association of which the weight should be decreased
+     * @param word a word from the association of which the weight should be decreased
+     * @param by value to decrease the weight of the association between the given thing and the given word
+     */
     @Override
     public void decreaseWeight(Thing thing, Word word, double by) {
         WeightPriorityQueue<Word> queue = thingWordQueueMap.get(thing);
@@ -95,7 +143,7 @@ public class LimitedWeightsLexicon implements WeightedLexicon{
     }
 
     @Override
-    public Map<Language, Double> countWeights(Collection<Language> languages){
+    public Map<Language, Double> countWeightSums(Collection<Language> languages){
         Map<Language, Double> weights = new HashMap<>();
         for(Language language: languages)
             weights.put(language, 0.0);

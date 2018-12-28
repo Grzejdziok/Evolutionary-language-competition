@@ -10,6 +10,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * A class for conducting a simulation with given parameters multiple number of times so that its results can be averaged.
+ * <p>
+ * A {@code SimulationConductor} object gathers averaged statistics for the set of simulations conducted by it. They are accessible
+ * with appropriate getters. Statistic are gathered for each language in the pattern simulation of a conductor.
+ * A {@code SimulationConductor} holds pointers to languages in an array, and therefore each language can be identified with an id (index in the array).
+ * @see Simulation
+ * @see Language
+ * @see SimulationConductorSerializer
+ */
 @Getter @EqualsAndHashCode @ToString
 public class SimulationConductor {
 
@@ -23,10 +33,10 @@ public class SimulationConductor {
     private int simulationsConducted = 0;
     private int iterations = 0;
     private int interactions = 0;
-    private int maxIterations = 0;
+    private int maxSimulationsLength = 0;
     private int unfinishedSimulations = 0;
 
-    public SimulationConductor(Simulation patternSimulation, int initialMaxIteration) {
+    private SimulationConductor(Simulation patternSimulation, int initialMaxIteration) {
         this.patternSimulation = new Cloner().deepClone(patternSimulation);
 
         this.languages = new Language[this.patternSimulation.getLanguages().size()];
@@ -56,10 +66,20 @@ public class SimulationConductor {
         }
     }
 
+    /**
+     * Initializes this conductor with the given simulation.
+     * @param patternSimulation the simulation to be conducted multiple times by this conductor.
+     */
     public SimulationConductor(Simulation patternSimulation) {
         this(patternSimulation, 0);
     }
 
+    /**
+     * Conducts this conductor's {@code patternSimulation} until the simulation's population reaches lexicon identity
+     * or {@code stopIteration} are conducted. During the conductment, statistics are gathered and at the end, they are merged
+     * to averaged statistics held by this conductor.
+     * @param stopIteration maximal number of iterations for this conductment
+     */
     public void conduct(int stopIteration) {
 
         Simulation simulation = new Cloner().deepClone(patternSimulation);
@@ -93,8 +113,8 @@ public class SimulationConductor {
         iterations += simulation.getNumOfIterations();
         interactions += simulation.getNumOfInteractions();
 
-        if (simulation.getNumOfIterations() > maxIterations)
-            maxIterations = simulation.getNumOfIterations();
+        if (simulation.getNumOfIterations() > maxSimulationsLength)
+            maxSimulationsLength = simulation.getNumOfIterations();
 
         simulationsConducted++;
 
@@ -102,6 +122,12 @@ public class SimulationConductor {
             unfinishedSimulations++;
     }
 
+    /**
+     * Conducts this conductor's {@code patternSimulation} multiple times.
+     * It is equivalent to invoking {@code this.conduct(stopIteration} {@code times} times.
+     * @param times number of times to conduct the {@code patternSimulation}
+     * @param stopIteration maximal number of iterations for this conductment
+     */
     public void conduct(int times, int stopIteration) {
         for (int i = 0; i < times; i++)
             conduct(stopIteration);
@@ -140,47 +166,63 @@ public class SimulationConductor {
 
     }
 
-    public Simulation getPatternSimulation() {
-        return patternSimulation;
-    }
-
+    /**
+     * Returns the average length in iterations of simulations conducted by this conductor.
+     * @return the average length in iterations of simulations conducted by this conductor
+     */
     public int getAverageIterations() {
         return iterations / simulationsConducted;
     }
 
-    public int getMaxIterations() {
-        return maxIterations;
-    }
-
-    public int getSimulationsConducted() {
-        return simulationsConducted;
-    }
-
+    /**
+     * Returns an array of weight sums of the given language in each iteration averaged over all simulations conducted by this conductor.
+     * @param language the language of which statistics should be returned
+     * @return an array of weight sums of the given language in each iteration averaged over all simulations conducted by this conductor.
+     */
     public double[] getAverageWeightSumsArray(Language language) {
-        double[] array = new double[maxIterations];
-        for (int i = 0; i < maxIterations; i++)
+        double[] array = new double[maxSimulationsLength];
+        for (int i = 0; i < maxSimulationsLength; i++)
             array[i] = averageWeightSums.get(language).get(i);
         return array;
     }
 
+    /**
+     * Returns an array of numbers of users of the given language in each iteration averaged over all simulations conducted by this conductor.
+     * @param language the language of which statistics should be returned
+     * @return an array of numbers of users of the given language in each iteration averaged over all simulations conducted by this conductor.
+     */
     public double[] getAverageNumsOfUsersArray(Language language) {
-        double[] array = new double[maxIterations];
-        for (int i = 0; i < maxIterations; i++)
+        double[] array = new double[maxSimulationsLength];
+        for (int i = 0; i < maxSimulationsLength; i++)
             array[i] = averageNumsOfUsers.get(language).get(i);
         return array;
     }
 
+    /**
+     * Returns an array of numbers of recognized things of the given language in each iteration averaged over all simulations conducted by this conductor.
+     * @param language the language of which statistics should be returned
+     * @return an array of numbers of recognized things of the given language in each iteration averaged over all simulations conducted by this conductor.
+     */
     public double[] getAverageNumsOfRecognizedThingsArray(Language language) {
-        double[] array = new double[maxIterations];
-        for (int i = 0; i < maxIterations; i++)
+        double[] array = new double[maxSimulationsLength];
+        for (int i = 0; i < maxSimulationsLength; i++)
             array[i] = averageNumsOfRecognizedThings.get(language).get(i);
         return array;
     }
 
+    /**
+     * Returns an array of languages of this conductr's {@code patternSimulation}
+     * @return an array of languages of this conductr's {@code patternSimulation}
+     */
     public Language[] getLanguagesArray() {
         return languages;
     }
 
+    /**
+     * Returns the id of the given language in this conductor's array of languages.
+     * @param language the language of which id should be returned
+     * @return the id of the given language in this conductor's array of languages.
+     */
     public int getLanguageId(Language language) {
         int i = 0;
         for (Language lang : languages) {
@@ -188,11 +230,6 @@ public class SimulationConductor {
             i++;
         }
         return -1;
-    }
-
-    public static void conduct(Simulation simulation, int maxIteration) {
-        while (!(simulation.agentsLexicallySynchronized() && simulation.oneToOneLexicons()) && simulation.getNumOfIterations() < maxIteration)
-            simulation.simulateOneStep();
     }
 
 }

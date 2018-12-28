@@ -1,58 +1,48 @@
 package util;
 
-import java.util.Objects;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
+/**
+ * A class that couples together a value and a double-valued weight connected with this value.
+ * @param <V> class of a value in this pair
+ * @see WeightPriorityQueue
+ */
+@Setter @Getter @EqualsAndHashCode @ToString
 public class WeightValuePair<V> implements Comparable<WeightValuePair<V>>{
 
     private double weight;
     private final V value;
 
-   public WeightValuePair(V value, double weight){
-        this.value = value;
+    /**
+     * Initializes a WeightValuePair object with the specified value and weight
+     * @param value the initial value of this pair
+     * @param weight the initial weight of this pair
+     */
+    public WeightValuePair(V value, double weight){
+       this.value = value;
        this.weight = weight;
     }
 
+    /**
+     * Initializes a WeightValuePair object with the specified value and weight equal to {@code 0}
+     * @param value the initial value of this pair
+     */
     public WeightValuePair(V value){
-        this.weight = 0;
-        this.value = value;
+        this(value, 0);
     }
 
-    public void setWeight(double weight) {
-        this.weight = weight;
-    }
-
-    public double getWeight(){
-        return weight;
-    }
-
-    public V getValue(){
-        return value;
-    }
-
+    /**
+     * Compares two WeightValuePair objects in accordance with their weights in reversed order. This function is equivalent to {@code Double.compare(o.getWeight, this.getWeight())}.
+     * @param o the WeightValuePair object to be compared
+     * @return the value 0 if {@code o.getWeight()} is numerically equal to {@code this.getWeight()};
+     * a value less than 0 if {@code o.getWeight()} is numerically less than {@code this.getWeight()};
+     * and a value greater than 0 if {@code o.getWeight()} is numerically greater than {@code this.getWeight()}.
+     */
     @Override
     public int compareTo(WeightValuePair<V> o) {
         return Double.compare(o.weight, this.getWeight());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(weight, value);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        WeightValuePair<?> that = (WeightValuePair<?>) o;
-        return Double.compare(that.weight, weight) == 0 &&
-                Objects.equals(value, that.value);
-    }
-
-    @Override
-    public String toString() {
-        return "WeightValuePair{" +
-                "getWeight=" + weight +
-                ", getValue=" + value +
-                '}';
     }
 }

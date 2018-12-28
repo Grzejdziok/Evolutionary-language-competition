@@ -3,8 +3,35 @@ package cli;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 
+/**
+ * A factory class for creating {@code Options} objects with options for simulations conducted
+ * in accordance with the computer model described in the "Evolutionary language competition - an agent-based model" paper.
+ */
 public class ELCPaperOptionsCreator implements OptionsCreator {
 
+    /**
+     * Returns an {@code Options} object with options for simulations conducted in accordance with the computer model described in the "Evolutionary language competition - an agent-based model" paper.
+     * <p>
+     * Returned {@code Options} object contains the following options:
+     * <ul>
+     * <li> {@code -n} ({@code --side}) defines the side of the agents' lattice graph </li>
+     * <li> {@code -N} ({@code --agents}) defines the number of agents</li>
+     * <li> {@code -N1} ({@code --agents1}) defines the initial size of the 1-lingual population </li>
+     * <li> {@code -N2} ({@code --agents2}) defines the initial size of the 2-lingual population</li>
+     * <li> {@code -d} ({@code --objects}) defines the number of objects</li>
+     * <li> {@code -d1} ({@code --devdegree1}) defines the initial environment (number of recognized objects with the words belonging to a language) of the 1-lingual population</li>
+     * <li> {@code -d2} ({@code --devdegree2}) defines the initial environemnt of the 2-lingual population</li>
+     * <li> {@code -eps} ({@code --epsilon}) defines the epsilon parameter</li>
+     * <li> {@code -var} ({@code --variant}) defines the model variant</li>
+     * <li> {@code -v} ({@code --variantInfluence}) defines the variant influence </li>
+     * <li> {@code -iv} ({@code --variantLanguage}) defines the variant language</li>
+     * <li> {@code -p} ({@code --path}) defines the json results file path</li>
+     * <li> {@code -s} ({@code --simulations}) defines the number of independent simulations to be conducted</li>
+     * <li> {@code -stop} ({@code --stopIteration}) defines the maximal number of iterations to simulate in every independent simulation</li>
+     * </ul>
+     * All of the options are by default not required.
+     * @return An {@code Options} object with options for simulations conducted in accordance with the computer model described in the "Evolutionary language competition - an agent-based model" paper.
+     */
     @Override
     public Options create() {
         Options options = new Options();
@@ -25,7 +52,7 @@ public class ELCPaperOptionsCreator implements OptionsCreator {
         latticeSide.setRequired(false);
         options.addOption(latticeSide);
 
-        Option numOfAgents = new Option("N", "numOfAgents", true, "specifies the number of numOfAgents in simulation");
+        Option numOfAgents = new Option("N", "agents", true, "specifies the number of numOfAgents in simulation");
         numOfAgents.setRequired(false);
         options.addOption(numOfAgents);
 

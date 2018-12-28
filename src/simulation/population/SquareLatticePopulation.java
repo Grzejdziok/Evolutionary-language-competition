@@ -7,11 +7,29 @@ import simulation.agent.*;
 
 import java.util.*;
 
+/**
+ * A class structuring agents in a square lattice-like graph described in "Evolutionary language competition - an agent-based model" paper.
+ * <p>
+ * In this kind of population, agents can be seen as though they were structured in a two dimensional array of dimensions {@code n x m}.
+ * Let an agent {@code a} be in position {@code [i, j]} (i-th row and j-th column).
+ * An edge connecting this agent with another agent {@code b} is of weight {@code 1.0 + epsilon}
+ * if and only if {@code b}'s position is {@code [i+1, j]}, {@code [i-1, j]}, {@code [i, j+1]} or {@code [i, j-1]};
+ * otherwise it is of weight {@code epsilon}.
+ * In other words, an edge connecting any two neighbouring in the array agents is of weight {@code 1.0 + epsilon}, and of weight {@code epsilon} otherwise.
+ * @see simulation.simulation.creator.ELCPaperSimulationCreator
+ */
 @Getter @EqualsAndHashCode @ToString
 public class SquareLatticePopulation implements Population {
+
     private Agent[][] agents;
     private double epsilon;
 
+    /**
+     * Initializes this population with the given parameters.
+     * @param agents an array of agents to be structured in square lattice
+     * @param side the first dimension of this population's lattice, the second is calculated as {@code agents.length/side}
+     * @param epsilon an additional weight added to weight of edge between any two agents
+     */
     public SquareLatticePopulation(Agent[] agents, int side, double epsilon) {
         this.epsilon = epsilon;
         this.agents = new Agent[side][agents.length/side];

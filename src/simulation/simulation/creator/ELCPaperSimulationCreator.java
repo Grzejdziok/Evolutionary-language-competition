@@ -23,19 +23,44 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
+/**
+ * A factory class for creating simulations of computer model described in "Evolutionary language competition - an agent-based model" paper.
+ * <p>
+ * This class can be cunstructed with provided builder class.
+ * <p>
+ * The following parameters can be defined for this kind of simulation:
+ * <ul>
+ *  <li> {@code side) defines the side of the agents' lattice graph (default: {@code 4}})</li>
+ *  <li> {@code numOfAgents} defines the number of agents (default: {@code side * side})</li>
+ *  <li> {@code numsOfUsers[]} defines the initial sizes of the 1-lingual and 2-lingual populations (default: {@code {numOfAgents/2, numOfAgents/2}}) </li>
+ *  <li> {@code numOfThings} defines the number of objects (default: {@code 5})</li>
+ *  <li> {@code devdegrees[]} defines the initial environment of the 1-lingual and 2-lingual populations (default: {@code {numOfThings, numOfThings}})</li>
+ *  <li> {@code epsilon} defines the epsilon parameter (default: {@code 0.05})</li>
+ *  <li> {@code variant} defines the model variant as a {@code String} (default: {@code "zero"})</li>
+ *  <li> {@code variantInfluence} defines the variant influence (default: {@code 0}) </li>
+ *  <li> {@code variantLanguage} defines the variant language (default: {@code 0})</li>
+ * </ul>
+ * The {@code create()} method constructs and returns an appropriate simulation object.
+ * <p>
+ * For more details, please see the paper.
+ */
 @Builder
 public class ELCPaperSimulationCreator implements SimulationCreator {
 
-    private int numOfThings;
-    private int[] devdegrees;
-    private int side;
-    private int numOfAgents;
-    private int[] numsOfUsers;
-    private double epsilon;
-    private String variant;
-    private int variantInfluence;
-    private int variantLanguage;
+    private int numOfThings = 5;
+    private int[] devdegrees = {numOfThings, numOfThings};
+    private int side = 4;
+    private int numOfAgents = side * side;
+    private int[] numsOfUsers = {numOfAgents/2, numOfAgents/2};
+    private double epsilon = 0.05;
+    private String variant = "zero";
+    private int variantInfluence = 0;
+    private int variantLanguage = 0;
 
+    /**
+     * Returns a {@code Simulation} object created in accordance with this factory's parameters.
+     * @return a {@code Simulation} object created in accordance with this factory's parameters.
+     */
     @Override
     public Simulation create() {
         Environment environment = createEnvironment(numOfThings);

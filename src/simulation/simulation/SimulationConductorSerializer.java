@@ -14,6 +14,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
+/**
+ * A class for serializing data from {@code SimulationConductor} objects in JSON format.
+ * To serialize an object to file, use the static method {@code writeToFile}.
+ * <p>
+ * This class can be used also as a {@code StdSerializer<SimulationConductor>} for user-defined serialization processes using Jackson databind library.
+ * @see StdSerializer
+ * @see SimulationConductor
+ */
 public class SimulationConductorSerializer extends StdSerializer<SimulationConductor> {
 
     public SimulationConductorSerializer() {
@@ -24,7 +32,13 @@ public class SimulationConductorSerializer extends StdSerializer<SimulationCondu
         super(t);
     }
 
-    public static void writeToJSON(SimulationConductor conductor, String path) throws IOException {
+    /**
+     * Serializes in JSON format the given conductor in a file saved in the given path.
+     * @param conductor a {@code SimulationConductor} object to be serialized
+     * @param path the path of file to serialize the given conductor
+     * @throws IOException an exception of input-output operations on the file from the given path
+     */
+    public static void writeToFile(SimulationConductor conductor, String path) throws IOException {
         Writer writer = new FileWriter(path);
 
         ObjectMapper objectMapper = new ObjectMapper();
@@ -44,7 +58,7 @@ public class SimulationConductorSerializer extends StdSerializer<SimulationCondu
         jsonGenerator.writeNumberField("number of simulations conducted", conductor.getSimulationsConducted());
         jsonGenerator.writeNumberField("number of simulations not finished", conductor.getUnfinishedSimulations());
         jsonGenerator.writeNumberField("average number of iterations", conductor.getAverageIterations());
-        jsonGenerator.writeNumberField("maximum number of iterations", conductor.getMaxIterations());
+        jsonGenerator.writeNumberField("maximum number of iterations", conductor.getMaxSimulationsLength());
         jsonGenerator.writeNumberField("objects", conductor.getPatternSimulation().getEnvironment().getThings().size());
         jsonGenerator.writeStringField("population type", conductor.getPatternSimulation().getPopulation().getClass().getSimpleName());
 
@@ -94,13 +108,13 @@ public class SimulationConductorSerializer extends StdSerializer<SimulationCondu
             serializerProvider.defaultSerializeValue(language, jsonGenerator);
 
             jsonGenerator.writeFieldName("average weight sums history");
-            jsonGenerator.writeArray(conductor.getAverageWeightSumsArray(language),0,conductor.getMaxIterations());
+            jsonGenerator.writeArray(conductor.getAverageWeightSumsArray(language),0,conductor.getMaxSimulationsLength());
 
             jsonGenerator.writeFieldName("average nums of users history");
-            jsonGenerator.writeArray(conductor.getAverageNumsOfUsersArray(language),0,conductor.getMaxIterations());
+            jsonGenerator.writeArray(conductor.getAverageNumsOfUsersArray(language),0,conductor.getMaxSimulationsLength());
 
             jsonGenerator.writeFieldName("average nums of recognized things history");
-            jsonGenerator.writeArray(conductor.getAverageNumsOfRecognizedThingsArray(language),0,conductor.getMaxIterations());
+            jsonGenerator.writeArray(conductor.getAverageNumsOfRecognizedThingsArray(language),0,conductor.getMaxSimulationsLength());
 
             jsonGenerator.writeEndObject();
         }
