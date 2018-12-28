@@ -1,8 +1,8 @@
 package simulation.lexicon;
 
 import simulation.environment.Thing;
-import simulation.language.Word;
 import simulation.language.Language;
+import simulation.language.Word;
 
 import java.util.Collection;
 import java.util.Map;

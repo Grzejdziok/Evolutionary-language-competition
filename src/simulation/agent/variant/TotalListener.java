@@ -1,13 +1,12 @@
 package simulation.agent.variant;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 import simulation.agent.Agent;
-import simulation.interaction.InteractionRunner;
 import simulation.environment.Thing;
-import simulation.language.Word;
+import simulation.interaction.InteractionRunner;
 import simulation.language.Language;
+import simulation.language.Word;
 
 import java.util.Collection;
 import java.util.Map;
@@ -20,7 +19,7 @@ import java.util.Map;
  * @see VariantAgent
  * @see simulation.simulation.creator.ELCPaperSimulationCreator
  */
-@Getter @EqualsAndHashCode @ToString
+@EqualsAndHashCode @ToString
 public class TotalListener implements VariantAgent {
 
     /**

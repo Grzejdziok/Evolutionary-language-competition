@@ -1,9 +1,10 @@
-import org.apache.commons.cli.*;
 import cli.ELCPaperOptionsCreator;
+import org.apache.commons.cli.*;
 import simulation.simulation.Simulation;
 import simulation.simulation.SimulationConductor;
 import simulation.simulation.SimulationConductorSerializer;
 import simulation.simulation.creator.ELCPaperSimulationCreator;
+
 import java.io.IOException;
 
 /**

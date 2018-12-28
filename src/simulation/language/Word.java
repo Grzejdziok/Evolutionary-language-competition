@@ -1,7 +1,6 @@
 package simulation.language;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 
 import java.util.Collection;
@@ -11,7 +10,7 @@ import java.util.HashSet;
  * A class representing words in computer models of language evolution.
  * In this implementation, words are identified and distinguished only with integer IDs.
  */
-@Getter @EqualsAndHashCode @ToString
+@EqualsAndHashCode @ToString
 public class Word implements Comparable<Word>{
 
     private final int id;
@@ -48,4 +47,7 @@ public class Word implements Comparable<Word>{
         return Integer.compare(id, o.getId());
     }
 
+    public int getId() {
+        return this.id;
+    }
 }

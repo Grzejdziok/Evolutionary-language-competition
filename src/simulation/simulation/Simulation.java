@@ -1,16 +1,15 @@
 package simulation.simulation;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 import simulation.agent.Agent;
 import simulation.agent.WeightedLexiconAgent;
 import simulation.agent.variant.VariantAgent;
+import simulation.environment.Environment;
+import simulation.environment.Thing;
 import simulation.interaction.InteractionRunner;
 import simulation.language.Language;
-import simulation.environment.Thing;
 import simulation.population.Population;
-import simulation.environment.Environment;
 
 import java.util.Collection;
 import java.util.Map;
@@ -26,7 +25,7 @@ import java.util.Map;
  * @see InteractionRunner
  * @see VariantAgent
  */
-@Getter @EqualsAndHashCode @ToString
+@EqualsAndHashCode @ToString
 public class Simulation {
 
     private Environment environment;
@@ -144,4 +143,35 @@ public class Simulation {
         return Agent.countRecognizedThings(getLanguages(), population.getAgentsArray());
     }
 
+    public Environment getEnvironment() {
+        return this.environment;
+    }
+
+    public Collection<Language> getLanguages() {
+        return this.languages;
+    }
+
+    public Population getPopulation() {
+        return this.population;
+    }
+
+    public InteractionRunner getInteractionRunner() {
+        return this.interactionRunner;
+    }
+
+    public VariantAgent getVariantAgent() {
+        return this.variantAgent;
+    }
+
+    public int getVariantInfluence() {
+        return this.variantInfluence;
+    }
+
+    public int getNumOfIterations() {
+        return this.numOfIterations;
+    }
+
+    public int getNumOfInteractions() {
+        return this.numOfInteractions;
+    }
 }

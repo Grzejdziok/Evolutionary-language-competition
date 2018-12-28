@@ -1,14 +1,13 @@
 package simulation.agent.variant;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 import simulation.agent.Agent;
+import simulation.environment.Thing;
 import simulation.interaction.InteractionRunner;
 import simulation.language.Language;
-import simulation.lexicon.Lexicon;
-import simulation.environment.Thing;
 import simulation.language.Word;
+import simulation.lexicon.Lexicon;
 
 import java.util.Collection;
 import java.util.Map;
@@ -22,7 +21,7 @@ import java.util.Random;
  * @see VariantAgent
  * @see simulation.simulation.creator.ELCPaperSimulationCreator
  */
-@Getter @EqualsAndHashCode @ToString
+@EqualsAndHashCode @ToString
 public class TotalSpeaker implements VariantAgent {
 
     private Lexicon lexicon;
@@ -142,5 +141,9 @@ public class TotalSpeaker implements VariantAgent {
     @Override
     public Map<Language, Collection<Thing>> recognizedThings(Collection<Language> languages) {
         return lexicon.recognizedThings(languages);
+    }
+
+    public Lexicon getLexicon() {
+        return this.lexicon;
     }
 }

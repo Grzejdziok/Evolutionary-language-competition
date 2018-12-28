@@ -2,7 +2,6 @@ package simulation.simulation;
 
 import com.rits.cloning.Cloner;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 import simulation.language.Language;
 
@@ -20,7 +19,7 @@ import java.util.Map;
  * @see Language
  * @see SimulationConductorSerializer
  */
-@Getter @EqualsAndHashCode @ToString
+@EqualsAndHashCode @ToString
 public class SimulationConductor {
 
     private final Simulation patternSimulation;
@@ -232,4 +231,43 @@ public class SimulationConductor {
         return -1;
     }
 
+    public Simulation getPatternSimulation() {
+        return this.patternSimulation;
+    }
+
+    public Language[] getLanguages() {
+        return this.languages;
+    }
+
+    public Map<Language, ArrayList<Double>> getAverageWeightSums() {
+        return this.averageWeightSums;
+    }
+
+    public Map<Language, ArrayList<Double>> getAverageNumsOfUsers() {
+        return this.averageNumsOfUsers;
+    }
+
+    public Map<Language, ArrayList<Double>> getAverageNumsOfRecognizedThings() {
+        return this.averageNumsOfRecognizedThings;
+    }
+
+    public int getSimulationsConducted() {
+        return this.simulationsConducted;
+    }
+
+    public int getIterations() {
+        return this.iterations;
+    }
+
+    public int getInteractions() {
+        return this.interactions;
+    }
+
+    public int getMaxSimulationsLength() {
+        return this.maxSimulationsLength;
+    }
+
+    public int getUnfinishedSimulations() {
+        return this.unfinishedSimulations;
+    }
 }

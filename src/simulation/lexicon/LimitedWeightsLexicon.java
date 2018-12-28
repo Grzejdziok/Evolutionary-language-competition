@@ -1,14 +1,16 @@
 package simulation.lexicon;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
-import simulation.language.Language;
 import simulation.environment.Thing;
+import simulation.language.Language;
 import simulation.language.Word;
 import util.WeightPriorityQueue;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 /**
  * A class of weighted lexicons in which association between things and words are weighted with values belonging to
@@ -18,7 +20,7 @@ import java.util.*;
  * @see WeightedLexicon
  * @see simulation.simulation.creator.ELCPaperSimulationCreator
  */
-@Getter @EqualsAndHashCode @ToString
+@EqualsAndHashCode @ToString
 public class LimitedWeightsLexicon implements WeightedLexicon{
 
     private Map<Thing, WeightPriorityQueue<Word>> thingWordQueueMap;
@@ -198,5 +200,17 @@ public class LimitedWeightsLexicon implements WeightedLexicon{
     @Override
     public double weight(Thing thing, Word word) {
         return thingWordQueueMap.get(thing).weight(word);
+    }
+
+    public Map<Thing, WeightPriorityQueue<Word>> getThingWordQueueMap() {
+        return this.thingWordQueueMap;
+    }
+
+    public double getMinWeight() {
+        return this.minWeight;
+    }
+
+    public double getMaxWeight() {
+        return this.maxWeight;
     }
 }

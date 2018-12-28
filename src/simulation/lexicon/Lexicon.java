@@ -1,7 +1,7 @@
 package simulation.lexicon;
 
-import simulation.language.Language;
 import simulation.environment.Thing;
+import simulation.language.Language;
 import simulation.language.Word;
 
 import java.util.Collection;

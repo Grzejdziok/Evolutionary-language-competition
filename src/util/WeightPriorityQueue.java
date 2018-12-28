@@ -1,6 +1,9 @@
 package util;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.PriorityQueue;
 
 /**
  * An auxiliary class which serves as a priority queue whose values are sorted in accordance with their weights

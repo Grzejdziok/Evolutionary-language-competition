@@ -1,8 +1,8 @@
 package simulation.agent;
 
 import simulation.environment.Environment;
-import simulation.language.Language;
 import simulation.environment.Thing;
+import simulation.language.Language;
 
 import java.util.Collection;
 import java.util.HashMap;

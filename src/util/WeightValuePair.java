@@ -1,8 +1,6 @@
 package util;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 
 /**
@@ -10,7 +8,7 @@ import lombok.ToString;
  * @param <V> class of a value in this pair
  * @see WeightPriorityQueue
  */
-@Setter @Getter @EqualsAndHashCode @ToString
+@EqualsAndHashCode @ToString
 public class WeightValuePair<V> implements Comparable<WeightValuePair<V>>{
 
     private double weight;
@@ -44,5 +42,17 @@ public class WeightValuePair<V> implements Comparable<WeightValuePair<V>>{
     @Override
     public int compareTo(WeightValuePair<V> o) {
         return Double.compare(o.weight, this.getWeight());
+    }
+
+    public double getWeight() {
+        return this.weight;
+    }
+
+    public V getValue() {
+        return this.value;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
     }
 }

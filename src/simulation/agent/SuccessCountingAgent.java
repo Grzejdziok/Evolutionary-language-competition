@@ -1,10 +1,9 @@
 package simulation.agent;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
-import simulation.language.Language;
 import simulation.environment.Thing;
+import simulation.language.Language;
 import simulation.language.Word;
 import simulation.lexicon.WeightedLexicon;
 
@@ -19,7 +18,7 @@ import java.util.*;
  * @see WeightedLexicon
  * @see simulation.simulation.creator.ELCPaperSimulationCreator
  */
-@Getter @EqualsAndHashCode @ToString
+@EqualsAndHashCode @ToString
 public class SuccessCountingAgent implements WeightedLexiconAgent {
 
     private WeightedLexicon lexicon;
@@ -203,5 +202,29 @@ public class SuccessCountingAgent implements WeightedLexiconAgent {
 
     private double proportion(Language language){
         return (double) successes.get(language)/((double) (losses.get(language) + successes.get(language)));
+    }
+
+    public WeightedLexicon getLexicon() {
+        return this.lexicon;
+    }
+
+    public Collection<Language> getLanguages() {
+        return this.languages;
+    }
+
+    public Map<Language, Integer> getSuccesses() {
+        return this.successes;
+    }
+
+    public Map<Language, Integer> getLosses() {
+        return this.losses;
+    }
+
+    public double getAcquireWeight() {
+        return this.acquireWeight;
+    }
+
+    public double getWeightChangingValue() {
+        return this.weightChangingValue;
     }
 }

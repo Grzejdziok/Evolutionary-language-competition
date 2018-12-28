@@ -1,11 +1,10 @@
 package simulation.population;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
-import simulation.agent.*;
+import simulation.agent.Agent;
 
-import java.util.*;
+import java.util.Random;
 
 /**
  * A class structuring agents in a square lattice-like graph described in "Evolutionary language competition - an agent-based model" paper.
@@ -18,7 +17,7 @@ import java.util.*;
  * In other words, an edge connecting any two neighbouring in the array agents is of weight {@code 1.0 + epsilon}, and of weight {@code epsilon} otherwise.
  * @see simulation.simulation.creator.ELCPaperSimulationCreator
  */
-@Getter @EqualsAndHashCode @ToString
+@EqualsAndHashCode @ToString
 public class SquareLatticePopulation implements Population {
 
     private Agent[][] agents;
@@ -210,4 +209,11 @@ public class SquareLatticePopulation implements Population {
         return agent;
     }
 
+    public Agent[][] getAgents() {
+        return this.agents;
+    }
+
+    public double getEpsilon() {
+        return this.epsilon;
+    }
 }

@@ -1,10 +1,9 @@
 package simulation.language;
 
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 import lombok.ToString;
 
-import java.util.*;
+import java.util.Random;
 
 /**
  * A class of languages based on modulo congruence relation.
@@ -13,7 +12,7 @@ import java.util.*;
  * @see simulation.simulation.creator.ELCPaperSimulationCreator
  * @see Language
  */
-@Getter @EqualsAndHashCode @ToString
+@EqualsAndHashCode @ToString
 public class ModuloLanguage implements Language, Comparable<ModuloLanguage> {
 
     private final int congruency;
@@ -63,4 +62,11 @@ public class ModuloLanguage implements Language, Comparable<ModuloLanguage> {
         else return Integer.compare(congruency, o.getCongruency());
     }
 
+    public int getCongruency() {
+        return this.congruency;
+    }
+
+    public int getModulus() {
+        return this.modulus;
+    }
 }

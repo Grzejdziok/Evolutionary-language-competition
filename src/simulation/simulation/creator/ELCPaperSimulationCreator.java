@@ -1,7 +1,6 @@
 package simulation.simulation.creator;
 
 import com.rits.cloning.Cloner;
-import lombok.Builder;
 import simulation.agent.Agent;
 import simulation.agent.SuccessCountingAgent;
 import simulation.agent.variant.TotalListener;
@@ -26,36 +25,59 @@ import java.util.Collection;
 /**
  * A factory class for creating simulations of computer model described in "Evolutionary language competition - an agent-based model" paper.
  * <p>
- * This class can be cunstructed with provided builder class.
+ * This class can be cunstructed only with provided builder class.
  * <p>
  * The following parameters can be defined for this kind of simulation:
  * <ul>
- *  <li> {@code side) defines the side of the agents' lattice graph (default: {@code 4}})</li>
- *  <li> {@code numOfAgents} defines the number of agents (default: {@code side * side})</li>
- *  <li> {@code numsOfUsers[]} defines the initial sizes of the 1-lingual and 2-lingual populations (default: {@code {numOfAgents/2, numOfAgents/2}}) </li>
- *  <li> {@code numOfThings} defines the number of objects (default: {@code 5})</li>
- *  <li> {@code devdegrees[]} defines the initial environment of the 1-lingual and 2-lingual populations (default: {@code {numOfThings, numOfThings}})</li>
- *  <li> {@code epsilon} defines the epsilon parameter (default: {@code 0.05})</li>
- *  <li> {@code variant} defines the model variant as a {@code String} (default: {@code "zero"})</li>
- *  <li> {@code variantInfluence} defines the variant influence (default: {@code 0}) </li>
- *  <li> {@code variantLanguage} defines the variant language (default: {@code 0})</li>
+ *  <li> {@code side} defines the side of the agents' lattice graph</li>
+ *  <li> {@code numOfAgents} defines the number of agents</li>
+ *  <li> {@code numsOfUsers[]} defines the initial sizes of the 1-lingual and 2-lingual populations</li>
+ *  <li> {@code numOfThings} defines the number of objects</li>
+ *  <li> {@code devdegrees[]} defines the initial environment of the 1-lingual and 2-lingual populations</li>
+ *  <li> {@code epsilon} defines the epsilon parameter</li>
+ *  <li> {@code variant} defines the model variant as a {@code String} (available {@code "tl", "ts", "zero"})</li>
+ *  <li> {@code variantInfluence} defines the variant influence </li>
+ *  <li> {@code variantLanguage} defines the variant language </li>
  * </ul>
  * The {@code create()} method constructs and returns an appropriate simulation object.
  * <p>
  * For more details, please see the paper.
+ * @see simulation.lexicon.LimitedWeightsLexicon
+ * @see SuccessCountingAgent
+ * @see ModuloLanguage
+ * @see Environment
+ * @see VariantAgent
+ * @see Simulation
+ * @see ELCPaperSimulationCreatorBuilder
  */
-@Builder
 public class ELCPaperSimulationCreator implements SimulationCreator {
 
-    private int numOfThings = 5;
-    private int[] devdegrees = {numOfThings, numOfThings};
-    private int side = 4;
-    private int numOfAgents = side * side;
-    private int[] numsOfUsers = {numOfAgents/2, numOfAgents/2};
-    private double epsilon = 0.05;
-    private String variant = "zero";
-    private int variantInfluence = 0;
-    private int variantLanguage = 0;
+    private int numOfThings;
+    private int[] devdegrees;
+    private int side;
+    private int numOfAgents;
+    private int[] numsOfUsers;
+    private double epsilon;
+    private String variant;
+    private int variantInfluence;
+    private int variantLanguage;
+
+    @java.beans.ConstructorProperties({"numOfThings", "devdegrees", "side", "numOfAgents", "numsOfUsers", "epsilon", "variant", "variantInfluence", "variantLanguage"})
+    ELCPaperSimulationCreator(int numOfThings, int[] devdegrees, int side, int numOfAgents, int[] numsOfUsers, double epsilon, String variant, int variantInfluence, int variantLanguage) {
+        this.numOfThings = numOfThings;
+        this.devdegrees = devdegrees;
+        this.side = side;
+        this.numOfAgents = numOfAgents;
+        this.numsOfUsers = numsOfUsers;
+        this.epsilon = epsilon;
+        this.variant = variant;
+        this.variantInfluence = variantInfluence;
+        this.variantLanguage = variantLanguage;
+    }
+
+    public static ELCPaperSimulationCreatorBuilder builder() {
+        return new ELCPaperSimulationCreatorBuilder();
+    }
 
     /**
      * Returns a {@code Simulation} object created in accordance with this factory's parameters.
@@ -130,4 +152,71 @@ public class ELCPaperSimulationCreator implements SimulationCreator {
         return languages;
     }
 
+    public static class ELCPaperSimulationCreatorBuilder {
+        private int numOfThings;
+        private int[] devdegrees;
+        private int side;
+        private int numOfAgents;
+        private int[] numsOfUsers;
+        private double epsilon;
+        private String variant;
+        private int variantInfluence;
+        private int variantLanguage;
+
+        ELCPaperSimulationCreatorBuilder() {
+        }
+
+        public ELCPaperSimulationCreatorBuilder numOfThings(int numOfThings) {
+            this.numOfThings = numOfThings;
+            return this;
+        }
+
+        public ELCPaperSimulationCreatorBuilder devdegrees(int[] devdegrees) {
+            this.devdegrees = devdegrees;
+            return this;
+        }
+
+        public ELCPaperSimulationCreatorBuilder side(int side) {
+            this.side = side;
+            return this;
+        }
+
+        public ELCPaperSimulationCreatorBuilder numOfAgents(int numOfAgents) {
+            this.numOfAgents = numOfAgents;
+            return this;
+        }
+
+        public ELCPaperSimulationCreatorBuilder numsOfUsers(int[] numsOfUsers) {
+            this.numsOfUsers = numsOfUsers;
+            return this;
+        }
+
+        public ELCPaperSimulationCreatorBuilder epsilon(double epsilon) {
+            this.epsilon = epsilon;
+            return this;
+        }
+
+        public ELCPaperSimulationCreatorBuilder variant(String variant) {
+            this.variant = variant;
+            return this;
+        }
+
+        public ELCPaperSimulationCreatorBuilder variantInfluence(int variantInfluence) {
+            this.variantInfluence = variantInfluence;
+            return this;
+        }
+
+        public ELCPaperSimulationCreatorBuilder variantLanguage(int variantLanguage) {
+            this.variantLanguage = variantLanguage;
+            return this;
+        }
+
+        public ELCPaperSimulationCreator build() {
+            return new ELCPaperSimulationCreator(numOfThings, devdegrees, side, numOfAgents, numsOfUsers, epsilon, variant, variantInfluence, variantLanguage);
+        }
+
+        public String toString() {
+            return "ELCPaperSimulationCreator.ELCPaperSimulationCreatorBuilder(numOfThings=" + this.numOfThings + ", devdegrees=" + Arrays.toString(this.devdegrees) + ", side=" + this.side + ", numOfAgents=" + this.numOfAgents + ", numsOfUsers=" + Arrays.toString(this.numsOfUsers) + ", epsilon=" + this.epsilon + ", variant=" + this.variant + ", variantInfluence=" + this.variantInfluence + ", variantLanguage=" + this.variantLanguage + ")";
+        }
+    }
 }
