@@ -4,7 +4,7 @@ The project is concerned with simulating the process of how the world's language
 
 The model implemented here is agent-based and each agent has its own language. The agents are initially divided into two groups speaking two different languages. Through pair-wise interactions agents modify their languages (their languages evolve). At last, in most cases, agents use one common language. Depending on initial conditions, the final language can be identical to one of the initial languages or can be a mixture of both of languages.
 
-The project is an implementation of the computer model described in the "Evolutionary language competition - an agent-based model" paper which is currently under review in *[International Journal of Applied Mathematics and Computer Science](https://www.amcs.uz.zgora.pl/)*. Detailed information of the model's rules can be found in a pdf file attached to this repository.
+The project is an implementation of the computer model described in my bachelor thesis entitled "Evolutionary language competition - an agent-based model". Detailed information of the model's rules can be found in a pdf file attached to this repository.
 
 ## Installation and build process
 ### Installation
