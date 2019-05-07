@@ -34,8 +34,8 @@ The "jar" directory will contain a new version of the jar executable file of the
 The project makes use of several external libraries. All of them are listed below:
 - [Lombok, version 1.18.4](https://projectlombok.org/)
 - [Apache Commons CLI, version 1.4.0](https://commons.apache.org/proper/commons-cli)
-- [jackson-core, version 2.9.7](https://github.com/FasterXML/jackson-core)
-- [jackson-databind, version 2.9.7](https://github.com/FasterXML/jackson-databind)
+- [jackson-core, version 2.9.8](https://github.com/FasterXML/jackson-core)
+- [jackson-databind, version 2.9.8](https://github.com/FasterXML/jackson-databind)
 - [Java Cloning Library, version 1.9.10](https://github.com/kostaskougios/cloning)
 ## Running the program
 The program can be run from the command line with the arguments denoted as in the paper. Go to the "jar" directory and run the following command:
